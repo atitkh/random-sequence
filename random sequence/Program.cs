@@ -2,12 +2,15 @@
 {
     static void Main()
     {
-        int sequenceLength = 20;
+        int sequenceLength = 50;
         char[] randomSequence;
+        List<char> replacedChars = [];
+        Random random = new();
 
         // user options
         Console.WriteLine("Press 1 to generate a random sequence or 2 to enter a sequence manually.");
-        string choice = Console.ReadLine()?.ToString() ?? string.Empty;
+        string choice = Console.ReadLine() ?? string.Empty;
+
         switch (choice)
         {
             case "1":
@@ -15,56 +18,60 @@
                 break;
             case "2":
                 Console.WriteLine("Enter a sequence: ");
-                string input = Console.ReadLine()?.ToString() ?? string.Empty;
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("Invalid input. Generating random sequence.");
+                    randomSequence = GenerateSequence(sequenceLength);
+                    break;
+                }
+
                 randomSequence = input.ToCharArray();
                 break;
             default:
-                randomSequence = GenerateSequence(sequenceLength);
                 Console.WriteLine("Invalid choice. Generating random sequence.");
+                randomSequence = GenerateSequence(sequenceLength);
                 break;
         }
 
         Console.WriteLine("Generated Sequence: " + new string(randomSequence));
 
         // verify sequence
-        bool hasNoRepeatation = VerifyRepeatedLetters(randomSequence);
-        bool containsDEL = VerifyContainsSubstring(randomSequence, "DEL");
+        bool hasRepetition = VerifyRepeatedLetters(randomSequence);
+        bool hasProhibitedSubstring = VerifySubstring(randomSequence, "xyz");
 
-        if (hasNoRepeatation && containsDEL)
+        if (!hasRepetition && !hasProhibitedSubstring)
         {
-            Console.WriteLine("Sequence is valid.");
+            Console.WriteLine($"Sequence is valid. (Repetition: {hasRepetition}, Contains 'xyz': {hasProhibitedSubstring})");
         }
         else
         {
-            Console.WriteLine("Sequence is invalid. (Repetition: " + !hasNoRepeatation + ", Contains 'DEL': " + containsDEL + ")");
+            // fix sequence
+            Console.WriteLine($"Sequence is invalid. (Repetition: {hasRepetition}, Contains 'xyz': {hasProhibitedSubstring})");
             Console.WriteLine("Would you like to fix the sequence? (Y/N)");
-            string fixChoice = Console.ReadLine()?.ToString() ?? string.Empty;
-            if (fixChoice.ToUpper() == "Y")
+            string fixChoice = Console.ReadLine() ?? string.Empty;
+            if (fixChoice.Equals("Y", StringComparison.CurrentCultureIgnoreCase))
             {
-                if (!hasNoRepeatation)
+                for (int i = 0; i < randomSequence.Length - 2; i++)
                 {
-                    for (int i = 0; i < randomSequence.Length - 1; i++)
+                    if (hasRepetition && char.ToLower(randomSequence[i]) == char.ToLower(randomSequence[i + 1]))
                     {
-                        if (randomSequence[i + 1] == randomSequence[i])
-                        {
-                            randomSequence[i + 1] = (char)(randomSequence[i] + 1);
-                        }
+                        replacedChars.Add(randomSequence[i + 1]);
+                        randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
                     }
-                }
 
-                if (!containsDEL)
-                {
-                    for (int i = 0; i < randomSequence.Length - 2; i++)
+                    if (hasProhibitedSubstring && char.ToLower(randomSequence[i]) == 'x' && char.ToLower(randomSequence[i + 1]) == 'y' && char.ToLower(randomSequence[i + 2]) == 'z')
                     {
-                        if (randomSequence[i] == 'D' && randomSequence[i + 1] == 'E' && randomSequence[i + 2] == 'L')
-                        {
-                            randomSequence[i + 1] = (char)(randomSequence[i] + 1);
-                            randomSequence[i + 2] = (char)(randomSequence[i] + 2);
-                        }
+                        replacedChars.Add(randomSequence[i + 1]);
+                        replacedChars.Add(randomSequence[i + 2]);
+                        randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
+                        randomSequence[i + 2] = (char)random.Next('a', 'z' + 1);
                     }
                 }
 
                 Console.WriteLine("Fixed Sequence: " + new string(randomSequence));
+                Console.WriteLine("Replaced characters: " + string.Join(", ", replacedChars));
             }
         }
     }
@@ -86,17 +93,17 @@
     {
         for (int i = 0; i < sequence.Length - 1; i++)
         {
-            if (sequence[i + 1] == sequence[i])
+            if (char.ToLower(sequence[i]) == char.ToLower(sequence[i + 1]))
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
-    static bool VerifyContainsSubstring(char[] sequence, string substring)
+    static bool VerifySubstring(char[] sequence, string substring)
     {
         string sequenceStr = new(sequence);
-        return sequenceStr.Contains(substring);
+        return sequenceStr.Contains(substring, StringComparison.CurrentCultureIgnoreCase);
     }
 }
