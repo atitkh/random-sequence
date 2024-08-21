@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("random sequence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d60ebb2cf248fa7fd11a5553e257460537d952f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df544ec77ce84b90fd82e74fe2364a83229bf23c")]
 [assembly: System.Reflection.AssemblyProductAttribute("random sequence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("random sequence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
