@@ -1,4 +1,4 @@
-﻿class RandomCharacterGenerator
+﻿class RandomSequenceGenerator
 {
     static void Main()
     {
