@@ -1,0 +1,15 @@
+D:\ATIT\Projects\UALR\random-sequence\random sequence\bin\Debug\net8.0\random sequence.exe
+D:\ATIT\Projects\UALR\random-sequence\random sequence\bin\Debug\net8.0\random sequence.deps.json
+D:\ATIT\Projects\UALR\random-sequence\random sequence\bin\Debug\net8.0\random sequence.runtimeconfig.json
+D:\ATIT\Projects\UALR\random-sequence\random sequence\bin\Debug\net8.0\random sequence.dll
+D:\ATIT\Projects\UALR\random-sequence\random sequence\bin\Debug\net8.0\random sequence.pdb
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.GeneratedMSBuildEditorConfig.editorconfig
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.AssemblyInfoInputs.cache
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.AssemblyInfo.cs
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.csproj.CoreCompileInputs.cache
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.sourcelink.json
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.dll
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\refint\random sequence.dll
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.pdb
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\random sequence.genruntimeconfig.cache
+D:\ATIT\Projects\UALR\random-sequence\random sequence\obj\Debug\net8.0\ref\random sequence.dll
