@@ -53,23 +53,30 @@
             string fixChoice = Console.ReadLine() ?? string.Empty;
             if (fixChoice.Equals("Y", StringComparison.CurrentCultureIgnoreCase))
             {
-                for (int i = 0; i < randomSequence.Length - 2; i++)
+                bool isValid = false;
+                while (!isValid)
                 {
-                    if (hasRepetition && char.ToLower(randomSequence[i]) == char.ToLower(randomSequence[i + 1]))
+                    replacedChars.Clear();
+                    for (int i = 0; i < randomSequence.Length - 2; i++)
                     {
-                        replacedChars.Add(randomSequence[i + 1]);
-                        randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
+                        if (hasRepetition && char.ToLower(randomSequence[i]) == char.ToLower(randomSequence[i + 1]))
+                        {
+                            replacedChars.Add(randomSequence[i + 1]);
+                            randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
+                        }
+            
+                        if (hasProhibitedSubstring && char.ToLower(randomSequence[i]) == 'x' && char.ToLower(randomSequence[i + 1]) == 'y' && char.ToLower(randomSequence[i + 2]) == 'z')
+                        {
+                            replacedChars.Add(randomSequence[i + 1]);
+                            replacedChars.Add(randomSequence[i + 2]);
+                            randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
+                            randomSequence[i + 2] = (char)random.Next('a', 'z' + 1);
+                        }
                     }
-
-                    if (hasProhibitedSubstring && char.ToLower(randomSequence[i]) == 'x' && char.ToLower(randomSequence[i + 1]) == 'y' && char.ToLower(randomSequence[i + 2]) == 'z')
-                    {
-                        replacedChars.Add(randomSequence[i + 1]);
-                        replacedChars.Add(randomSequence[i + 2]);
-                        randomSequence[i + 1] = (char)random.Next('a', 'z' + 1);
-                        randomSequence[i + 2] = (char)random.Next('a', 'z' + 1);
-                    }
+            
+                    isValid = !VerifyRepeatedLetters(randomSequence) && !VerifySubstring(randomSequence, "xyz");
                 }
-
+            
                 Console.WriteLine("Fixed Sequence: " + new string(randomSequence));
                 Console.WriteLine("Replaced characters: " + string.Join(", ", replacedChars));
             }
